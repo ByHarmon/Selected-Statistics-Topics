@@ -1,0 +1,59 @@
+#######################################################################################################################################
+# Teoría
+
+1. 
+# b) Especifica el mensaje del commit directamente desde la línea de comandos.
+
+2. 
+# a) Como excepciones o casos avanzados que van más allá de las primeras tres formas normales.
+
+3. 
+# La Primera Forma Normal (1NF).
++ Cada campo debe tener un solo valor.
++ No debe haber grupos repetidos de columnas.
++ Debe existir una clave primaria que identifique de manera única cada registro.
+
+4. 
+# WHERE: Se utiliza para filtrar filas antes de que se realicen las operaciones de agrupamiento (GROUP BY) y puede aplicar condiciones a cualquier columna de la tabla.
+# HAVING: Se utiliza para filtrar resultados después de que se ha realizado la agrupación (GROUP BY) y generalmente se utiliza para aplicar condiciones a las funciones de agregación (como SUM, COUNT, AVG).
+
+5.
+# c) FROM -> WHERE -> SELECT -> ORDER BY
+
+#######################################################################################################################################
+
+# Práctica
+
+1.
+
+```SQL
+-- poner solución debajo de este mensaje
+
+-- Obtener el promedio de la edad de los alumnos cuyo apellido termine en 'ez', por ejemplo Pérez, Rodríguez.
+SELECT AVG(edad) AS promedio_edad
+FROM alumnos
+WHERE apellido LIKE '%ez';
+
+2.
+
+```SQL
+-- poner solución debajo de este mensaje
+
+SELECT c.nombre_materia, COUNT(DISTINCT a.expediente) AS cantidad_alumnos
+FROM calificaciones c
+JOIN alumnos a ON c.expediente = a.expediente
+WHERE a.edad > 20
+GROUP BY c.nombre_materia
+ORDER BY cantidad_alumnos DESC;
+
+3.
+
+```SQL
+-- poner solución debajo de este mensaje
+
+SELECT a.nombre, a.apellido, c.calificacion
+FROM alumnos a
+JOIN calificaciones c ON a.expediente = c.expediente
+WHERE c.nombre_materia = 'Matemáticas'
+ORDER BY c.calificacion DESC
+LIMIT 1 OFFSET 1;
